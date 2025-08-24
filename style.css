@@ -1,0 +1,38 @@
+* {
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+body {
+  background: #0d0d0d !important;
+  color: #ffffff !important;
+  font-family: 'Poppins', sans-serif !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100vh !important;
+}
+
+.title {
+  position: absolute !important;
+  top: 20px !important;
+  font-size: 2rem !important;
+  color: #00d9ff !important;
+  font-weight: bold !important;
+  text-align: center !important;
+}
+
+.instructions {
+  position: absolute !important;
+  bottom: 20px !important;
+  color: #cccccc !important;
+  font-size: 1rem !important;
+  text-align: center !important;
+}
+
+canvas {
+  display: block !important;
+}
