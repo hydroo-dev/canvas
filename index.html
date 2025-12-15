@@ -1,18 +1,641 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hydroo Canvas Playground</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCS Business Analyst Written Assessment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-image: 
+                radial-gradient(#0055a6 1px, transparent 1px),
+                radial-gradient(#0055a6 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
+            background-color: #f5f5f5;
+        }
+        
+        .exam-paper {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            padding: 40px;
+            position: relative;
+            border-top: 8px solid #0055a6;
+            border-bottom: 8px solid #0055a6;
+        }
+        
+        /* Header Animation */
+        @keyframes slideDown {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eee;
+            animation: slideDown 1s ease-out;
+        }
+        
+        .tcs-logo {
+            font-size: 42px;
+            font-weight: 900;
+            color: #0055a6;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: pulse 2s infinite;
+        }
+        
+        .tcs-subtitle {
+            font-size: 20px;
+            color: #666;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+        
+        .exam-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #222;
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+            padding: 0 20px;
+        }
+        
+        .exam-title::before, .exam-title::after {
+            content: "📝";
+            position: absolute;
+            top: 0;
+            font-size: 24px;
+            animation: bounce 2s infinite;
+        }
+        
+        .exam-title::before {
+            left: -15px;
+        }
+        
+        .exam-title::after {
+            right: -15px;
+        }
+        
+        .exam-details {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f0f7ff;
+            border-radius: 8px;
+            border-left: 6px solid #0055a6;
+            animation: slideDown 1.2s ease-out;
+        }
+        
+        .detail-item {
+            margin: 10px 0;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .detail-item i {
+            color: #0055a6;
+            animation: rotate 4s linear infinite;
+        }
+        
+        #live-timer {
+            font-weight: 700;
+            color: #d32f2f;
+            background-color: #ffebee;
+            padding: 5px 15px;
+            border-radius: 20px;
+            animation: pulse 1.5s infinite;
+        }
+        
+        .instructions {
+            background-color: #fff8e1;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border-left: 6px solid #ffc107;
+            animation: slideDown 1.4s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .instructions::before {
+            content: "⚠️";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 40px;
+            opacity: 0.2;
+            animation: rotate 20s linear infinite;
+        }
+        
+        .instructions h3 {
+            color: #d68b00;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+        }
+        
+        .instructions h3 i {
+            animation: shake 1s infinite;
+        }
+        
+        .instructions ul {
+            padding-left: 25px;
+            margin-top: 15px;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 10px;
+        }
+        
+        .instructions li::before {
+            content: "👉";
+            position: absolute;
+            left: -25px;
+            animation: bounce 2s infinite;
+        }
+        
+        .honesty-pledge {
+            background-color: #e8f5e9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 2px dashed #4CAF50;
+            animation: pulse 3s infinite;
+        }
+        
+        .honesty-pledge i {
+            color: #4CAF50;
+            font-size: 24px;
+            animation: rotate 3s linear infinite;
+        }
+        
+        .section {
+            margin: 40px 0;
+            padding-top: 25px;
+            border-top: 2px solid #eee;
+            animation: slideDown 1.6s ease-out;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            color: #0055a6;
+        }
+        
+        .section-header i {
+            font-size: 24px;
+            animation: bounce 2s infinite;
+        }
+        
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+        }
+        
+        .marks {
+            background-color: #0055a6;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 16px;
+            margin-left: auto;
+            animation: pulse 2s infinite;
+        }
+        
+        .question {
+            margin-bottom: 30px;
+            padding-left: 15px;
+            border-left: 4px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .question:hover {
+            border-left-color: #0055a6;
+            background-color: #f9f9f9;
+            padding-left: 20px;
+            transform: translateX(5px);
+        }
+        
+        .question-number {
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: #222;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .question-number::before {
+            content: "❓";
+            font-size: 20px;
+            animation: shake 1.5s infinite;
+        }
+        
+        .question-text {
+            margin-bottom: 10px;
+            margin-left: 30px;
+        }
+        
+        .sub-question {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .scenario-box {
+            background-color: #f0f7ff;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border-left: 6px solid #4a90e2;
+            animation: slideDown 1.8s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .scenario-box::before {
+            content: "📌";
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 40px;
+            opacity: 0.2;
+            animation: bounce 3s infinite;
+        }
+        
+        .scenario-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            color: #4a90e2;
+            font-size: 18px;
+        }
+        
+        .scenario-title i {
+            animation: rotate 4s linear infinite;
+        }
+        
+        .scoring-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            animation: slideDown 2s ease-out;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .scoring-table th {
+            background-color: #0055a6;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-size: 18px;
+        }
+        
+        .scoring-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            font-size: 16px;
+        }
+        
+        .scoring-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .scoring-table tr:hover {
+            background-color: #f0f7ff;
+            transform: scale(1.01);
+            transition: all 0.3s ease;
+        }
+        
+        .verdict-good {
+            color: #4CAF50;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .verdict-good::before {
+            content: "✅";
+            animation: bounce 2s infinite;
+        }
+        
+        .verdict-warning {
+            color: #FF9800;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .verdict-warning::before {
+            content: "⚠️";
+            animation: shake 1.5s infinite;
+        }
+        
+        .verdict-bad {
+            color: #F44336;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .verdict-bad::before {
+            content: "❌";
+            animation: shake 1s infinite;
+        }
+        
+        .footer-note {
+            text-align: center;
+            margin-top: 40px;
+            font-style: italic;
+            color: #666;
+            padding-top: 20px;
+            border-top: 2px dashed #ddd;
+            animation: slideDown 2.2s ease-out;
+        }
+        
+        .integrity-seal {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-left: auto;
+            margin-right: auto;
+            border: 5px solid #4CAF50;
+            animation: pulse 4s infinite;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .integrity-seal i {
+            font-size: 40px;
+            color: #4CAF50;
+            margin-bottom: 10px;
+            animation: rotate 6s linear infinite;
+        }
+        
+        .integrity-seal span {
+            font-weight: 700;
+            color: #2e7d32;
+        }
+        
+        /* Clock Styles */
+        .clock-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .clock {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #0055a6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 10px rgba(0, 85, 166, 0.5);
+        }
+        
+        .clock-colon {
+            font-size: 20px;
+            font-weight: bold;
+            color: #0055a6;
+            animation: pulse 1s infinite;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .exam-paper {
+                padding: 20px;
+            }
+            
+            .exam-details {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .marks {
+                margin-left: 0;
+            }
+        }
+    </style>
 </head>
 <body>
-
-  <h1 class="title">Hydroo • Canvas Playground</h1>
-  <canvas id="canvas"></canvas>
-  <p class="instructions">Move your mouse or touch the screen to create fireworks!</p>
-
-  <script src="script.js"></script>
-</body>
-</html>
+    <div class="exam-paper">
+        <div class="header">
+            <div class="tcs-logo">TCS</div>
+            <div class="tcs-subtitle">Tanna Consultancy Services</div>
+            <div class="exam-title">Business Analyst – Written Assessment</div>
+        </div>
+        
+        <div class="exam-details">
+            <div class="detail-item">
+                <i class="fas fa-clock"></i>
+                <strong>Time:</strong> 90 minutes
+            </div>
+            <div class="detail-item">
+                <i class="fas fa-star"></i>
+                <strong>Total Marks:</strong> 90
+            </div>
+            <div class="detail-item">
+                <i class="fas fa-calendar-alt"></i>
+                <strong>Date:</strong> <span id="current-date"></span>
+            </div>
+            <div class="detail-item">
+                <i class="fas fa-hourglass-half"></i>
+                <strong>Time Remaining:</strong> <span id="live-timer">90:00</span>
+            </div>
+            
+            <!-- Live Clock -->
+            <div class="clock-container">
+                <div class="clock" id="hours">00</div>
+                <div class="clock-colon">:</div>
+                <div class="clock" id="minutes">00</div>
+                <div class="clock-colon">:</div>
+                <div class="clock" id="seconds">00</div>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3><i class="fas fa-clipboard-list"></i> Instructions:</h3>
+            <ul>
+                <li>Answer in clear, structured points</li>
+                <li>Assume you are writing for a real client</li>
+                <li><strong>STRICTLY NO INTERNET / AI / GOOGLE HELP</strong></li>
+                <li>Clarity > length</li>
+                <li>Timer will automatically count down from 90 minutes</li>
+                <li>Submit before timer reaches 00:00</li>
+            </ul>
+            
+            <div class="honesty-pledge">
+                <i class="fas fa-handshake"></i>
+                <div>
+    <strong>Vidya Padhai Kasam:</strong> Main yeh assessment poori imaandari ke saath complete karunga/karungi, 
+    bina ChatGPT, kisi bhi AI tool, ya Google ka use kiye hue.
+</div>
+            </div>
+        </div>
+        
+        <!-- SECTION 1 -->
+        <div class="section">
+            <div class="section-header">
+                <i class="fas fa-brain"></i>
+                <div class="section-title">SECTION 1: Core Understanding</div>
+                <div class="marks">20 Marks</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-number">Q1. In your own words, explain the role of a Business Analyst in a project.</div>
+                <div class="question-text">(Do NOT write definitions from books.)</div>
+                <div class="marks" style="display: inline-block; background-color: #4CAF50; margin-top: 10px;">5 Marks</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-number">Q2. Explain the difference between:</div>
+                <div class="sub-question">
+                    <div class="question-text">- Business Problem</div>
+                    <div class="question-text">- Requirement</div>
+                    <div class="question-text">- Solution</div>
+                    <div class="question-text">Give one example for each.</div>
+                </div>
+                <div class="marks" style="display: inline-block; background-color: #4CAF50;">5 Marks</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-number">Q3. Write:</div>
+                <div class="sub-question">
+                    <div class="question-text">- 2 Functional requirements</div>
+                    <div class="question-text">- 2 Non-functional requirements</div>
+                    <div class="question-text">for an online food delivery app.</div>
+                </div>
+                <div class="marks" style="display: inline-block; background-color: #4CAF50;">5 Marks</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-number">Q4. What steps will you take if a client gives unclear requirements?</div>
+                <div class="marks" style="display: inline-block; background-color: #4CAF50;">5 Marks</div>
+            </div>
+        </div>
+        
+        <!-- SECTION 2 -->
+        <div class="section">
+            <div class="section-header">
+                <i class="fas fa-chart-line"></i>
+                <div class="section-title">SECTION 2: Scenario-Based Analysis</div>
+                <div class="marks">40 Marks</div>
+            </div>
+            
+            <div class="scenario-box">
+                <div class="scenario-title">
+                    <i class="fas fa-scroll"></i>
+                    <strong>Scenario:</strong>
+                </div>
+                <p>A company has a mobile e-commerce app. Many users add products to cart but do not complete payment. The client wants to improve conversion.</p>
+            </div>
+            
+            <div class="question">
+                <div class="question-number">Q5. List at least 10 questions you will ask the client before suggesting any solution.</div>
+                <div class="marks" style="display: inline-block; background-color: #FF9800; margin-top: 10px;">10 Marks</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-number">Q6. Write a clear problem statement for the above scenario.</div>
+                <div class="marks" style="display: inline-block; background-color: #FF9800;">5 Marks</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-number">Q7. Identify and write:</div>
+                <div class="sub-question">
+                    <div class="question-text">- 5 Functional requirements</div>
+                    <div class="question-text">- 3 Non-functional requirements</div>
+                </div>
+                <div class="marks" style="display: inline-block; background-color: #FF9800;">10 Marks</div>
+            </div>
+            
+            <div class="question">
+                <div class="question-number">Q8. Write 2 user stories for this scenario in proper format.</div>
+                <div class="marks" style="display: inline-block; background-color: #FF9800;">5 Marks</div>
+            </div>
+            
+            <div
